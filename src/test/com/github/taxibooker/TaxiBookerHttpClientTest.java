@@ -3,7 +3,7 @@ package test.com.github.taxibooker;
 import static org.junit.Assert.*;
 
 
-public class HttpClientTest {
+public class TaxiBookerHttpClientTest {
 
     @org.junit.Before
     public void setUp() throws Exception {
