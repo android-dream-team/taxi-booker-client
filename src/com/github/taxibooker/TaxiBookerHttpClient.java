@@ -25,7 +25,7 @@ public class TaxiBookerHttpClient {
     }
 
     public static class BackendUrl extends GenericUrl {
-        private static String environment = "testing";
+        private static String environment = "production";
         private static String server_url = "http://script.google.com/macros/s/AKfycbyR8RnL1gN1cQpHY1OQPRzfoKJIfpH0s6JUmEyPF0lWfdhraXMu/exec";
 
         public BackendUrl(String encodedUrl) {
