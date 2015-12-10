@@ -2,97 +2,90 @@ package com.github.taxibooker;
 
 import com.google.api.client.http.*;
 import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.http.json.JsonHttpContent;
 import com.google.api.client.json.GenericJson;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.jackson2.JacksonFactory;
-
-import com.google.api.client.util.Key;
+import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.UUID;
 
-import com.google.api.client.testing.http.HttpTesting;
-import com.google.api.client.testing.http.MockHttpTransport;
-import com.google.api.client.testing.http.MockHttpUnsuccessfulResponseHandler;
-import com.google.api.client.testing.http.MockLowLevelHttpRequest;
-import com.google.api.client.testing.http.MockLowLevelHttpResponse;
-import com.google.api.client.testing.util.LogRecordingHandler;
-import com.google.api.client.testing.util.MockBackOff;
-import com.google.api.client.testing.util.MockSleeper;
-import com.google.api.client.util.BackOff;
-import com.google.api.client.util.Key;
-import com.google.api.client.util.LoggingStreamingContent;
-import com.google.api.client.util.StringUtils;
-import com.google.api.client.util.Value;
-//import com.google.common.base.Charsets;
-//import com.google.common.collect.ImmutableList;
-//import com.google.common.collect.ImmutableSet;
-//import com.google.common.collect.Lists;
-
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
-
-
-enum OrderState {NOT_FOUND, IN_PROGRESS, BOOKED, COMPLETED}
 
 public class TaxiBookerHttpClient {
     static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
     static final JsonFactory JSON_FACTORY = new JacksonFactory();
 
-    public int number;
+    private String phoneNumber;
+
+    public TaxiBookerHttpClient(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public static class BackendUrl extends GenericUrl {
+        private static String environment = "testing";
+        private static String server_url = "http://script.google.com/macros/s/AKfycbyR8RnL1gN1cQpHY1OQPRzfoKJIfpH0s6JUmEyPF0lWfdhraXMu/exec";
 
         public BackendUrl(String encodedUrl) {
             super(encodedUrl);
         }
 
-        public static BackendUrl fetch(String query) {
-            return new BackendUrl(
-                    "http://script.google.com/macros/s/AKfycbyR8RnL1gN1cQpHY1OQPRzfoKJIfpH0s6JUmEyPF0lWfdhraXMu/exec?content={'orderId': 'dsadasdasdasdasdasdasdasdasdasdasdasdasdasd', 'phoneNumber': '+380508561377', 'addressFrom': 'вулиця Горького 3', 'addressTo': 'залізничний вокзал', 'bookingTime': '18:30 24 Грудня 2014'}");
+        public static BackendUrl post(String orderId, String phoneNumber, String addressFrom,
+                                      String addressTo, String bookingTime) {
+            Map<String, String> data = new HashMap<>();
+            data.put("env", environment);
+            data.put("orderId", orderId);
+            data.put("phoneNumber", phoneNumber);
+            data.put("addressFrom", addressFrom);
+            data.put("addressTo", addressTo);
+            data.put("bookingTime", bookingTime);
+            Gson gson = new Gson();
+            String json = gson.toJson(data);
+            return new BackendUrl(server_url + "?addOrder=" + json);
         }
+
+        public static BackendUrl get(String orderId) {
+            Map<String, String> data = new HashMap<>();
+            data.put("env", environment);
+            data.put("orderId", orderId);
+            Gson gson = new Gson();
+            String json = gson.toJson(data);
+            return new BackendUrl(server_url + "?getOrder=" + json);
+        }
+
     }
 
-    public TaxiBookerHttpClient() {
-        number = 25;
-    }
-
-    public String addOrder(Object order /* Order order */) {
-        number += 4;
+    public String addOrder(String addressFrom, String addressTo, String bookingTime) {
+        String orderId = UUID.randomUUID().toString();
         String result;
         try {
-            result = sendRequest().toPrettyString();
-        } catch (IOException e)
-        {
-            System.out.println("Exception: " + e);
-            result = "Something went wrong";
-
+            result = sendPostRequest(orderId, addressFrom, addressTo, bookingTime).toPrettyString();
+            System.out.println(result);
+            return orderId;
+        } catch (IOException e) {
+            System.out.println("Something went wrong. Exception: " + e);
+            return null;
         }
-        return result;
     }
 
-    public OrderState getOrderState(String orderId) {
-
-        return OrderState.NOT_FOUND;
+    public HashMap getOrder(String orderId) {
+        try {
+            String json = sendGetRequest(orderId).toPrettyString();
+            System.out.println(json);
+            Gson gson = new Gson();
+            HashMap<String, String> map = new HashMap<String, String>();
+            map = (HashMap<String, String>) gson.fromJson(json, map.getClass());
+            return map;
+        } catch (IOException e) {
+            System.out.println("Something went wrong. Exception: " + e);
+            return null;
+        }
     }
 
-    private GenericJson sendRequest() throws IOException {
+    private GenericJson sendPostRequest(String orderId, String addressFrom,
+                                        String addressTo, String bookingTime) throws IOException {
         HttpRequestFactory requestFactory =
                 HTTP_TRANSPORT.createRequestFactory(new HttpRequestInitializer() {
                     @Override
@@ -100,24 +93,23 @@ public class TaxiBookerHttpClient {
                         request.setParser(new JsonObjectParser(JSON_FACTORY));
                     }
                 });
-        BackendUrl url = BackendUrl.fetch("How to code in Java");
-//        HttpRequest request = requestFactory.buildGetRequest(url);
-        Map<String, String> json = new HashMap<String, String>();
-        json.put("key", "value");
-        final HttpContent content = new JsonHttpContent(new JacksonFactory(), json);
-//        String contentValue = "{'name': 'hello'}";
-//        byte[] bytes = StringUtils.getBytesUtf8(contentValue);
-//        InputStreamContent content = new InputStreamContent(
-//                new HttpMediaType("application/json").build(),
-//                new ByteArrayInputStream(bytes));
-
-        System.out.println(url);
-        System.out.println(content.getLength());
-//        HttpRequest request = requestFactory.buildRequest("POST", url, content);
-//        HttpRequest request = requestFactory.buildPostRequest(url, content);
+        BackendUrl url = BackendUrl.post(orderId, this.phoneNumber, addressFrom, addressTo, bookingTime);
+        System.out.println("URL for sendPostRequest: " + url);
         HttpRequest request = requestFactory.buildGetRequest(url);
+        return parseResponse(request.execute());
+    }
 
-
+    private GenericJson sendGetRequest(String orderId) throws IOException {
+        HttpRequestFactory requestFactory =
+                HTTP_TRANSPORT.createRequestFactory(new HttpRequestInitializer() {
+                    @Override
+                    public void initialize(HttpRequest request) {
+                        request.setParser(new JsonObjectParser(JSON_FACTORY));
+                    }
+                });
+        BackendUrl url = BackendUrl.get(orderId);
+        System.out.println("URL for sendGetRequest: " + url);
+        HttpRequest request = requestFactory.buildGetRequest(url);
         return parseResponse(request.execute());
     }
 
@@ -126,6 +118,4 @@ public class TaxiBookerHttpClient {
         System.out.println("Response: " + result);
         return result;
     }
-
-
 }
