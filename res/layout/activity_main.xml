@@ -18,7 +18,7 @@
         android:id="@+id/inputFrom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Order"
+        android:layout_alignLeft="@+id/buttonOrder"
         android:layout_below="@+id/textFrom"
         android:layout_marginTop="27dp"
         android:ems="10"
@@ -28,7 +28,7 @@
     </EditText>
 
     <Button
-        android:id="@+id/Order"
+        android:id="@+id/buttonOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textFrom"
@@ -57,5 +57,14 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="text" />
+    
+<!--      <fragment
+        tools:context=".MainActivity"
+   		android:id="@+id/map"   		
+   		android:layout_width="match_parent"
+   		android:layout_height="match_parent"
+   		android:name="com.google.android.gms.maps.MapFragment"
+   		class="com.google.android.gms.maps.MapFragment" />  -->
+    
 
 </RelativeLayout>
