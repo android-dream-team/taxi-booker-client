@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_taxi-booker-client" default="compile.module.taxi-booker-client">
+  <dirname property="module.taxi-booker-client.basedir" file="${ant.file.module_taxi-booker-client}"/>
+  
+  <property name="module.jdk.home.taxi-booker-client" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.taxi-booker-client" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.taxi-booker-client" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.taxi-booker-client" value="-encoding UTF-8 -source 1.6 -target 1.6 ${compiler.args}"/>
+  
+  <property name="taxi-booker-client.output.dir" value="${module.taxi-booker-client.basedir}/out/production/taxi-booker-client"/>
+  <property name="taxi-booker-client.testoutput.dir" value="${module.taxi-booker-client.basedir}/out/test/taxi-booker-client"/>
+  
+  <path id="taxi-booker-client.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="taxi-booker-client.module.production.classpath">
+    <path refid="${module.jdk.classpath.taxi-booker-client}"/>
+  </path>
+  
+  <path id="taxi-booker-client.runtime.production.module.classpath">
+    <pathelement location="${taxi-booker-client.output.dir}"/>
+  </path>
+  
+  <path id="taxi-booker-client.module.classpath">
+    <path refid="${module.jdk.classpath.taxi-booker-client}"/>
+    <pathelement location="${taxi-booker-client.output.dir}"/>
+  </path>
+  
+  <path id="taxi-booker-client.runtime.module.classpath">
+    <pathelement location="${taxi-booker-client.testoutput.dir}"/>
+    <pathelement location="${taxi-booker-client.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.taxi-booker-client">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.taxi-booker-client">
+    <patternset refid="excluded.from.module.taxi-booker-client"/>
+  </patternset>
+  
+  
+  <target name="compile.module.taxi-booker-client" depends="compile.module.taxi-booker-client.production,compile.module.taxi-booker-client.tests" description="Compile module taxi-booker-client"/>
+  
+  <target name="compile.module.taxi-booker-client.production" depends="register.custom.compilers" description="Compile module taxi-booker-client; production classes"/>
+  
+  <target name="compile.module.taxi-booker-client.tests" depends="register.custom.compilers,compile.module.taxi-booker-client.production" description="compile module taxi-booker-client; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.taxi-booker-client" description="cleanup module">
+    <delete dir="${taxi-booker-client.output.dir}"/>
+    <delete dir="${taxi-booker-client.testoutput.dir}"/>
+  </target>
+</project>
