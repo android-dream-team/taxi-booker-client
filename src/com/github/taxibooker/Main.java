@@ -15,9 +15,10 @@ public class Main {
         // add initial order
         String phoneNumber = "8 050 856 13 77";
         TaxiBookerHttpClient client = new TaxiBookerHttpClient(phoneNumber);
-        String addressFrom = "проспект Перемоги 45, Київ";
-        String addressTo = "провулок Ковальський 5, Київ";
-        String bookingTime = new Date().toString();
+        String addressFrom = "Проспект Победы 45, Киев";
+        String addressTo = "Проулок Ковальский 5, Киев";
+        //String bookingTime = new Date().toString();
+        String bookingTime = new Date(System.currentTimeMillis() + 60 * 1000).toString();
         System.out.println(bookingTime);
         String orderId = client.addOrder(addressFrom, addressTo, bookingTime);
 

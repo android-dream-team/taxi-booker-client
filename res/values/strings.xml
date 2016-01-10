@@ -5,6 +5,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
+    <string name="time">Time:</string>
+    <string name="phoneNumber">Phone number:</string>
     <string name="action_settings">Settings</string>
 
 </resources>

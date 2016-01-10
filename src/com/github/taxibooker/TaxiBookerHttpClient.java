@@ -8,6 +8,8 @@ import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.gson.Gson;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
@@ -79,7 +81,7 @@ public class TaxiBookerHttpClient {
             map = (HashMap<String, String>) gson.fromJson(json, map.getClass());
             return map;
         } catch (IOException e) {
-            System.out.println("Something went wrong. Exception: " + e);
+        	Log.d("MyApp","Something went wrong. Exception: " + e);
             return null;
         }
     }

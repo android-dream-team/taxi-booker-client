@@ -27,16 +27,6 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/buttonOrder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textFrom"
-        android:layout_alignStart="@+id/textFrom"
-        android:layout_below="@+id/inputFrom"
-        android:layout_marginTop="139dp"
-        android:text="OK" />
-
     <TextView
         android:id="@+id/textTo"
         android:layout_width="wrap_content"
@@ -65,6 +55,51 @@
    		android:layout_height="match_parent"
    		android:name="com.google.android.gms.maps.MapFragment"
    		class="com.google.android.gms.maps.MapFragment" />  -->
-    
+
+    <TextView
+        android:id="@+id/textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editTime"
+        android:layout_alignLeft="@+id/editTime"
+        android:text="@string/time" />
+
+    <Button
+        android:id="@+id/buttonOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textFrom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textFrom"
+        android:layout_marginBottom="14dp"
+        android:text="OK" />
+
+    <EditText
+        android:id="@+id/EditText01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textNum"
+        android:layout_below="@+id/textNum"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inputTo"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTime"
+        android:layout_below="@+id/editTime"
+        android:layout_marginTop="32dp"
+        android:text="@string/phoneNumber" />
 
 </RelativeLayout>
