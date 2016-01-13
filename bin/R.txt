@@ -437,7 +437,6 @@ int drawable abc_textfield_search_default_mtrl_alpha 0x7f020041
 int drawable abc_textfield_search_material 0x7f020042
 int drawable ic_launcher 0x7f020043
 int drawable notification_template_icon_bg 0x7f020044
-int id EditText01 0x7f090057
 int id action0 0x7f090059
 int id action_bar 0x7f090041
 int id action_bar_activity_content 0x7f090003
@@ -470,6 +469,7 @@ int id customPanel 0x7f090036
 int id decor_content_parent 0x7f09003f
 int id default_activity_button 0x7f090027
 int id disableHome 0x7f09000d
+int id editPhone 0x7f090057
 int id editTime 0x7f090056
 int id edit_query 0x7f090043
 int id end 0x7f09001f

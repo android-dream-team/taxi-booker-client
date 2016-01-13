@@ -2000,7 +2000,6 @@ containing a value of this type.
         public static final int notification_template_icon_bg=0x7f020044;
     }
     public static final class id {
-        public static final int EditText01=0x7f090057;
         public static final int action0=0x7f090059;
         public static final int action_bar=0x7f090041;
         public static final int action_bar_activity_content=0x7f090003;
@@ -2033,6 +2032,7 @@ containing a value of this type.
         public static final int decor_content_parent=0x7f09003f;
         public static final int default_activity_button=0x7f090027;
         public static final int disableHome=0x7f09000d;
+        public static final int editPhone=0x7f090057;
         public static final int editTime=0x7f090056;
         public static final int edit_query=0x7f090043;
         public static final int end=0x7f09001f;

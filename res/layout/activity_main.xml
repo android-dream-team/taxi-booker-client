@@ -75,7 +75,7 @@
         android:text="OK" />
 
     <EditText
-        android:id="@+id/EditText01"
+        android:id="@+id/editPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textNum"
