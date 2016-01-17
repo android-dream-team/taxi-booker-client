@@ -19,3 +19,6 @@ CONTRIBUTORS:
 
 
 See https://github.com/android-dream-team/taxi-booker-backend in more details.
+
+![alt tag](https://github.com/android-dream-team/taxi-booker-client/blob/15798bb7d227705fcbe17c4ca9949accdee5e003/ddms1.png)
+![alt tag](https://github.com/android-dream-team/taxi-booker-client/blob/15798bb7d227705fcbe17c4ca9949accdee5e003/ddms2.png)
