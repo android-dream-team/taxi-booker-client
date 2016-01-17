@@ -20,5 +20,17 @@ CONTRIBUTORS:
 
 See https://github.com/android-dream-team/taxi-booker-backend in more details.
 
-![alt tag](https://github.com/android-dream-team/taxi-booker-client/blob/15798bb7d227705fcbe17c4ca9949accdee5e003/ddms1.png)
-![alt tag](https://github.com/android-dream-team/taxi-booker-client/blob/15798bb7d227705fcbe17c4ca9949accdee5e003/ddms2.png)
+Here are some images, demonstrating performance characteristics of the application.
+![alt tag](https://github.com/android-dream-team/taxi-booker-client/blob/master/ddms1.png)
+![alt tag](https://github.com/android-dream-team/taxi-booker-client/blob/master/ddms2.png)
+It can be issued, that application uses rather small amount of heap memory. The feedback is received rather quickly.
+
+Here are also some screens of the application:
+1. Start screen
+![alt tag](https://github.com/android-dream-team/taxi-booker-client/blob/master/screen1.png)
+2. The order is added to database
+![alt tag](https://github.com/android-dream-team/taxi-booker-client/blob/master/screen2.png)
+3. Google callendar
+![alt tag](https://github.com/android-dream-team/taxi-booker-client/blob/master/screen3.jpg)
+4. Database
+![alt tag](https://github.com/android-dream-team/taxi-booker-client/blob/master/screen4.jpg)
