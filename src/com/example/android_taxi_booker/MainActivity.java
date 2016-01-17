@@ -116,19 +116,4 @@ public class MainActivity extends Activity {
 			      alertDialog.show();
 		    }
 		  }
-	   
-//	   public void open(View view){
-//		      AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//		      alertDialogBuilder.setMessage(order.toString());
-//		      
-//		      alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//		         @Override
-//		         public void onClick(DialogInterface arg0, int arg1) {
-//		            Toast.makeText(MainActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
-//		         }
-//		      });
-//		      
-//		      AlertDialog alertDialog = alertDialogBuilder.create();
-//		      alertDialog.show();
-//		   }
 }
